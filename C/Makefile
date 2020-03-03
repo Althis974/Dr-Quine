@@ -16,7 +16,7 @@ COLLEEN				=	Colleen
 GRACE				=	Grace
 SULLY				=	Sully
 COLLEEN_FILENAMES	=	Colleen.c
-GRACE_FILENAMES		=	Grace_kid.c
+GRACE_FILENAMES		=	Grace.c
 SULLY_FILENAMES		=	Sully.c
 
 COLLEEN_SOURCES		=	$(addprefix Colleen_dir/, $(COLLEEN_FILENAMES))
