@@ -19,9 +19,9 @@ COLLEEN_FILENAMES	=	Colleen.c
 GRACE_FILENAMES		=	Grace.c
 SULLY_FILENAMES		=	Sully.c
 
-COLLEEN_SOURCES		=	$(addprefix Colleen_dir/, $(COLLEEN_FILENAMES))
-GRACE_SOURCES		=	$(addprefix Grace_dir/, $(GRACE_FILENAMES))
-SULLY_SOURCES		=	$(addprefix Sully_dir/, $(SULLY_FILENAMES))
+COLLEEN_SOURCES		=	$(addprefix Col/, $(COLLEEN_FILENAMES))
+GRACE_SOURCES		=	$(addprefix Gra/, $(GRACE_FILENAMES))
+SULLY_SOURCES		=	$(addprefix Sul/, $(SULLY_FILENAMES))
 COLLEEN_OBJECTS		=	$(addprefix build/, $(COLLEEN_FILENAMES:.c=.o))
 GRACE_OBJECTS		=	$(addprefix build/, $(GRACE_FILENAMES:.c=.o))
 SULLY_OBJECTS		=	$(addprefix build/, $(SULLY_FILENAMES:.c=.o))
@@ -31,7 +31,7 @@ FLAGS				=	-Wall -Wextra -Werror
 LOADIR				=	../extra/Progress_Bar-for-Makefile
 LOADF				=	$(LOADIR)/loading.sh
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re cclean gclean sclean
 
 
 all: $(NAME)
@@ -40,8 +40,8 @@ clean:
 	@echo "\033[31m"
 	@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
 	@rm -rf build/
-	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tObject Files\t\033[0m\
-	\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
+	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tObject Files\t\033[0m \
+		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
 
 fclean: clean
 	@echo "\033[31m"
@@ -49,8 +49,28 @@ fclean: clean
 	@rm -f $(COLLEEN)
 	@rm -f $(GRACE)
 	@rm -f $(SULLY)
-	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tCompiled Files\t\033[0m\
-	\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
+	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tCompiled Files\t\033[0m \
+		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
+
+cclean:
+	@echo "\033[31m"
+	@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
+	@rm tmp_Colleen
+	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\ttmp_Colleen\t\033[0m \
+		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
+
+sclean:
+	@echo "\033[31m"
+	@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
+	@rm Sully_*
+	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tSully_% files\t\033[0m \
+		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
+gclean:
+	@echo "\033[31m"
+	@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
+	@rm Grace_kid.c
+	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tGrace_kid.c\t\033[0m \
+		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
 
 re:
 	@$(MAKE) fclean
@@ -92,17 +112,17 @@ $(SULLY): $(SULLY_OBJECTS)
 	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃\tExecutable\t\t\033[0m \033[1m⟿  \
 		\033[32mCreation Success\033[0m ✅\n"
 
-build/%.o: Colleen_dir/%.c | build
+build/%.o: Col/%.c | build
 	@echo "\033[35m"
 	@sh $(LOADF) $(LOADIR) $< o y
 	@gcc $(FLAGS) -c $< -o $@
 
-build/%.o: Grace_dir/%.c | build
+build/%.o: Gra/%.c | build
 	@echo "\033[35m"
 	@sh $(LOADF) $(LOADIR) $< o y
 	@gcc $(FLAGS) -c $< -o $@
 
-build/%.o: Sully_dir/%.c | build
+build/%.o: Sul/%.c | build
 	@echo "\033[35m"
 	@sh $(LOADF) $(LOADIR) $< o y
 	@gcc $(FLAGS) -c $< -o $@
