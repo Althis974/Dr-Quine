@@ -22,7 +22,7 @@ SULLY_FILENAMES		=	Sully.c
 COLLEEN_SOURCES		=	$(addprefix Colleen_dir/, $(COLLEEN_FILENAMES))
 GRACE_SOURCES		=	$(addprefix Grace_dir/, $(GRACE_FILENAMES))
 SULLY_SOURCES		=	$(addprefix Sully_dir/, $(SULLY_FILENAMES))
-COLLEN_OBJECTS		=	$(addprefix build/, $(COLLEEN_FILENAMES:.c=.o))
+COLLEEN_OBJECTS		=	$(addprefix build/, $(COLLEEN_FILENAMES:.c=.o))
 GRACE_OBJECTS		=	$(addprefix build/, $(GRACE_FILENAMES:.c=.o))
 SULLY_OBJECTS		=	$(addprefix build/, $(SULLY_FILENAMES:.c=.o))
 
@@ -34,7 +34,7 @@ LOADF				=	$(LOADIR)/loading.sh
 .PHONY: all clean fclean re
 
 
-all: $(NAME) $(COLLEEN) $(GRACE) $(SULLY)
+all: $(NAME)
 
 clean:
 	@echo "\033[31m"
@@ -60,19 +60,19 @@ build:
 	@echo "\033[35m"
 	@mkdir build/
 
-$(NAME): $(COLLEN_OBJECTS) $(GRACE_OBJECTS) $(SULLY_OBJECTS)
+$(NAME): $(COLLEEN) $(GRACE) $(SULLY)
 
-$(COLLEEN):
+$(COLLEEN): $(COLLEEN_OBJECTS)
 	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃\tObject Files\033[0m \
 		\033[1m⟿ \t\033[32mCreation Success\033[0m ✅\n"
 	@echo "\033[42m\033[30m"
 	@sh $(LOADF) $(LOADIR) $@ e n $(COLLEEN)
 	@echo "\033[0m"
-	@gcc $(FLAGS) $(COLLEN_OBJECTS) -o $@
+	@gcc $(FLAGS) $(COLLEEN_OBJECTS) -o $@
 	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃\tExecutable\t\t\033[0m \033[1m⟿  \
 		\033[32mCreation Success\033[0m ✅\n"
 
-$(GRACE):
+$(GRACE): $(GRACE_OBJECTS)
 	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃\tObject Files\033[0m \
 		\033[1m⟿ \t\033[32mCreation Success\033[0m ✅\n"
 	@echo "\033[42m\033[30m"
@@ -82,7 +82,7 @@ $(GRACE):
 	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃\tExecutable\t\t\033[0m \033[1m⟿  \
 		\033[32mCreation Success\033[0m ✅\n"
 
-$(SULLY):
+$(SULLY): $(SULLY_OBJECTS)
 	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $@⭃\tObject Files\033[0m \
 		\033[1m⟿ \t\033[32mCreation Success\033[0m ✅\n"
 	@echo "\033[42m\033[30m"
@@ -93,13 +93,16 @@ $(SULLY):
 		\033[32mCreation Success\033[0m ✅\n"
 
 build/%.o: Colleen_dir/%.c | build
+	@echo "\033[35m"
 	@sh $(LOADF) $(LOADIR) $< o y
 	@gcc $(FLAGS) -c $< -o $@
 
 build/%.o: Grace_dir/%.c | build
+	@echo "\033[35m"
 	@sh $(LOADF) $(LOADIR) $< o y
 	@gcc $(FLAGS) -c $< -o $@
 
 build/%.o: Sully_dir/%.c | build
+	@echo "\033[35m"
 	@sh $(LOADF) $(LOADIR) $< o y
 	@gcc $(FLAGS) -c $< -o $@
