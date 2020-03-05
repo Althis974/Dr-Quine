@@ -63,7 +63,7 @@ sclean:
 	@echo "\033[31m"
 	@sh $(LOADF) $(LOADIR) $@ r n $(NAME)
 	@rm -rf tmp/
-	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tSully_% files\t\033[0m \
+	@printf "\n\033[1m\033[34m\t\t\t\t⥷ $(NAME)⭃\tSully_ files\t\033[0m \
 		\033[1m⟿ \t\033[31mDeletion Success\033[0m ✅\n"
 gclean:
 	@echo "\033[31m"
